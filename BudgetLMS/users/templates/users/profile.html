@@ -1,0 +1,6 @@
+{% extends "LMS/Base.html" %}
+{% block content %}
+    <img class="solid" src="{{ user.profile.image.url }}" alt="Profile Picture">
+    <h1>{{ user.username }}</h1>
+    <pre>{{ user.profile.bio }}!</pre>
+{% endblock content %}

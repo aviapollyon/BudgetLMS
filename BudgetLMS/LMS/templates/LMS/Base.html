@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="static/Bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'LMS/style.css' %}">
+    </head>
+    <body>
+    <header id="header">
+        <nav class="links" style="--items: {% if user.is_authenticated %}5{% else %}5{% endif %};">
+            <a href="{% url "dashboard" %}">Dashboard</a>
+            <a href="#">Assignments</a>
+            <a href="#">Grades</a>
+            {% if not user.is_authenticated %}
+            <a href="#">Login</a>
+            <a href="#">Register</a>
+            {% else %}
+            <a href="{% url "profile" %}">Profile</a>
+            <a href="#" onclick="document.getElementById('logoutform').submit(); return false;">Logout</a>
+            <form id="logoutform" method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <input type="hidden">
+            </form>
+            {% endif %}
+            <span class="line"></span>
+        </nav>
+    </header>
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+        <script src="static/Bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="" async defer></script>
+    </body>
+</html>
